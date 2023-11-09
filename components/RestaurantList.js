@@ -1,6 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { router } from "expo-router";
 import { View, ScrollView } from "react-native";
 import RestaurantCard from "./RestaurantCard";
+import { RestaurantContext } from "../app/_layout";
+import { Fab, FabLabel } from "@gluestack-ui/themed";
 
 export default function RestaurantList() {
 
@@ -13,6 +16,15 @@ export default function RestaurantList() {
             .catch(alert)
     }, [])
 
+    const { setThisRest } = useContext (RestaurantContext)
+
+    const chooseRandom = () => {
+        const randomIndex = Math.floor(Math.random() * restaurants.length)
+        setThisRest(restaurants[randomIndex])
+        router.push("/details")
+        
+    }
+
     return (
         <View>
             <ScrollView>
@@ -20,6 +32,12 @@ export default function RestaurantList() {
                     <RestaurantCard key={rest._id} restaurant={rest} />
                 ))}
             </ScrollView>
+            <Fab 
+                onPress={chooseRandom}
+                size="lg"
+                bgColor="$blue700">
+                <FabLabel size="lg">🎲</FabLabel>
+            </Fab>
         </View>
     )
 }

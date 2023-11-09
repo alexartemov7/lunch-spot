@@ -18,7 +18,7 @@ export default function RestaurantCard({ restaurant }) {
             p={12}
             mb={16}
             rounded="$xl"
-            bgColor="backgroundLight50">
+            bgColor="$backgroundLight50">
             <Image
                 w='$full'
                 h={160}
